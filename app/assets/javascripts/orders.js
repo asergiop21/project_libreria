@@ -3,7 +3,7 @@ var calculo_subtotal = function(price, quantity, discount){
   if (price == ""){price = 0}
   if (quantity == ""){quantity = 0}
   if (discount == ""){discount = 0}
- var subtotal = (parseFloat(price) - (parseFloat(price) * parseFloat(discount)) /100) * parseFloat(quantity);
+  var subtotal = (parseFloat(price) - (parseFloat(price) * parseFloat(discount)) /100) * parseFloat(quantity);
   return subtotal;
 }
 
@@ -33,13 +33,13 @@ $(document).ready(function(){
     if (price_total == isNaN || price_total == ""){price_total = 0;}
     if (price_remove == isNaN || price_remove == ""){price_remove = 0;}
     if (price_total > 0)
-  {
-    var valor = parseFloat(price_total) - parseFloat(price_remove);
-    valor = valor.toFixed(2);
-  }
-  price_total = $('#invoice_price_total').val(valor);
-  $(this).closest('tr.line2').remove()
-    event.preventDefault();
+    {
+      var valor = parseFloat(price_total) - parseFloat(price_remove);
+      valor = valor.toFixed(2);
+    }
+    price_total = $('#invoice_price_total').val(valor);
+    $(this).closest('tr.line2').remove()
+      event.preventDefault();
   });
 
   $('table.line1').on('keydown', '[data-autocomplete-for]', function(event){
@@ -54,10 +54,10 @@ $(document).ready(function(){
           dataType: 'json', data: { q: request.term },
           success: function(data) {
             response(
-              $.map(data, function(item) {
-                return {label:item.barcode + " - " + item.name, item: item};
-              })
-              );
+                $.map(data, function(item) {
+                  return {label:item.barcode + " - " + item.name, item: item};
+                })
+                );
           },
         });
       },
@@ -71,6 +71,10 @@ $(document).ready(function(){
         var field_unit_price = '#invoice_orders_attributes_' + id[3] + '_price_unit';
         var quantity_stock = '#invoice_orders_attributes_' + id[3] + '_quantity_stock';
         var quantity = '#invoice_orders_attributes_' + id[3] + '_quantity';
+        if ($(quantity).val() == "" )
+        {
+          $('#invoice_orders_attributes_' + id[3] + '_quantity').val(1);
+        }
         var price_subtotal = '#invoice_orders_attributes_' + id[3] + '_price_total';
         var discount = '#invoice_orders_attributes_' + id[3] + '_discount';
         $(field_article_id).val(ui.item.item.id);
@@ -97,8 +101,8 @@ $(document).ready(function(){
 
   $(document).on('blur','.price_unit_add', function(event){
 
-        $(".add_fields").click();
-      
+    $(".add_fields").click();
+
   });
 
 });
