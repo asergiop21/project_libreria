@@ -52,7 +52,6 @@
                 <tr>
                   <th>#</th>
                   <th><%= Article.human_attribute_name(:name)%></th>
-                  <th><%= Article.human_attribute_name(:supplier)%></th>
                   <th><%= Article.human_attribute_name(:price_total)%></th>
                   <th><%= Article.human_attribute_name(:quantity)%></th>
                   <th colspan="3"></th>
@@ -64,7 +63,6 @@
 
                     <td><%= article.id %></td>
                     <td><%= article.name %></td>
-                    <td><%= article.supplier.name if !article.supplier_id.nil?  %></td>
                     <td><b><%= number_to_currency(article.price_total) %></b></td>
                     <td><%= article.quantity %></td>
                     <%if can? :edit, @article %>
